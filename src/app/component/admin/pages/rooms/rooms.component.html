@@ -1,0 +1,170 @@
+<div class="container-fluid p-2">
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-end">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create Room
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content text-start">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Create Room Here</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="createRoomForm" (ngSubmit)="submitRoom()">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control"  [ngClass]="{ 'is-invalid': createRoomForm.get('name')?.invalid && createRoomForm.get('name')?.touched }" id="name" formControlName="name"
+                    placeholder="Enter room name">
+                    <div class="invalid-feedback" *ngIf="createRoomForm.get('name')?.invalid && createRoomForm.get('name')?.touched">
+                      Name is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                  <label for="room_number" class="form-label">Room No</label>
+                  <input type="text" formControlName="room_number" [ngClass]="{ 'is-invalid': createRoomForm.get('room_number')?.invalid && createRoomForm.get('room_number')?.touched }" class="form-control" id="room_number"
+                    placeholder="Enter room No">
+                    <div class="invalid-feedback" *ngIf="createRoomForm.get('room_number')?.invalid && createRoomForm.get('room_number')?.touched">
+                      Room No is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                  <label for="">Select Users</label>
+                  <div class="multi-select-dropdown">
+                    <div class="selected-options">
+                      <span *ngFor="let user of selectedUsers" class="selected-item">
+                        {{ user.first_name }} {{ user.last_name }}
+                        <button type="button" class="unselect-btn" (click)="toggleSelection(user)">
+                          &times;
+                        </button>
+                      </span>
+                    </div>
+
+                    <div class="dropdown-options">
+                      <label *ngFor="let user of userData" class="dropdown-item">
+                        <input type="checkbox" [checked]="isUserSelected(user)" (change)="toggleSelection(user)" />
+                        {{ user.first_name }} {{ user.last_name }}
+                      </label>
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="mb-3">
+                  <label for="client_id" class="form-label">Select Residents</label>
+                  <div class="multi-select-dropdown">
+                    <div class="selected-options">
+                      <span *ngFor="let client of selectedClients" class="selected-item">
+                        {{ client.first_name }} {{ client.last_name }}
+                        <button type="button" class="unselect-btn" (click)="toggleSelectionClient(client)">
+                          &times;
+                        </button>
+                      </span>
+                    </div>
+                  
+                    <div class="dropdown-options">
+                      <label *ngFor="let client of clientData" class="dropdown-item">
+                        <input
+                          type="checkbox"
+                          [checked]="isClientSelected(client)"
+                          (change)="toggleSelectionClient(client)"
+                        />
+                        {{ client.first_name }} {{ client.last_name }}
+                      </label>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea formControlName="description"  [ngClass]="{ 'is-invalid': createRoomForm.get('description')?.invalid && createRoomForm.get('description')?.touched }" placeholder="Enter description" class="form-control"
+                    id="description" rows="3"></textarea>
+                </div>
+                <div class="invalid-feedback" *ngIf="createRoomForm.get('description')?.invalid && createRoomForm.get('description')?.touched">
+                  Description is required.
+                </div>
+
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="search-container mb-2 mt-4">
+    <input type="text" class="form-control" placeholder="Search Rooms" [(ngModel)]="searchText" (input)="filterRooms()" />
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" *ngFor="let room of filteredRooms">
+      <div class="card mt-4" (click)="roomDetails(room.id)" style="cursor: pointer;">
+        <div class="card-header d-flex justify-content-between">
+          <span class="fw-bold">{{ room.name }}</span> <span class="fw-bold">No : {{ room.room_number }}</span>
+        </div>
+        
+        <div class="card-body">
+          <p class="card-text"> {{ room.description }}</p>
+          <hr>
+         
+         <div class="row">
+          
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <p>Users</p>
+            <div class="popover-container" *ngFor="let userId of room.user_ids.split(',')" style="display: inline-flex;">
+              <button class="popover-button" #autoClickButton (click)="ByIds(room.user_ids)" (mouseenter)="fetchUserDetails(userId)" [attr.data-user-id]="userId">
+                {{ getInitials(userId) }}
+              </button>
+              <div class="popover-content">
+                <p *ngIf="userDetails[userId]; else loading">
+                  {{ userDetails[userId].first_name }} {{ userDetails[userId].last_name }}
+                </p>
+                <ng-template #loading>
+                  <p>Loading...</p>
+                </ng-template>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <p>Resident </p>
+
+          <div class="popover-container" *ngFor="let userId of room.client_id.split(',')" style="display: inline-flex;">
+            <button class="popover-button" (click)="ByIds(room.user_ids)" (mouseenter)="fetchUserDetails(userId)" [attr.data-user-id]="userId">
+              {{ getInitials(userId) }}
+            </button>
+            <div class="popover-content">
+              <p *ngIf="userDetails[userId]; else loading">
+                {{ userDetails[userId].first_name }} {{ userDetails[userId].last_name }}
+              </p>
+              <ng-template #loading>
+                <p>Loading...</p>
+              </ng-template>
+            </div>
+          </div>
+          </div>
+
+          </div>
+          
+          
+         </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  

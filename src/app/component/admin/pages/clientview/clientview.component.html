@@ -1,0 +1,207 @@
+<div class="col-12 d-flex justify-content-between align-items-center mt-3">
+  <!-- Title Section -->
+  <h5 class="fs-4 text-center text-md-start p-2 mb-0" style="color: #777;">Residents List</h5>
+
+  <!-- Add Button Section -->
+  <button type="button" (click)="addClient()" class="btn btn-primary addbutton text-white">
+    <i class="fa-sharp fa-solid fa-plus"></i> Add
+  </button>
+</div>
+
+
+
+<div class="mt-2" style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px;">
+  <table class="table table-bordered table-hover table-striped ">
+    <thead class="" style="font-size: 13px; text-wrap: nowrap; ">
+      <tr>
+        <th>Room No</th>
+        <th>Residents</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody style="text-wrap: nowrap;" class="">
+      <tr style="background-color: #f9f9f9;" *ngFor="let a of getusersData;   let i = index">
+        <td style="text : center;">
+          <div class="d-flex gap-2" style="justify-content: center;">
+            <div>
+              <button type="button" class="btn small-btn text-light"
+                style="background-color: #34395e;">{{a.room_number}}</button>
+
+            </div>
+
+          </div>
+        </td>
+        <td>
+          <div style="display: flex;  justify-content: start; margin-left:  10px;">
+            <!-- Profile Image -->
+            <img [src]="a.profile || 'https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg'"
+              class="img-fluid"
+              style="width: 50px; height: 50px; border-radius: 100%; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;"
+              alt="Profile Image">
+
+            <!-- Name and Email -->
+            <div style="margin-left: 0px;">
+              <p style="margin: 0; font-weight: bold;text-align: start;font-size: 0.9em;"> <span
+                  (click)="ByIds(a.id)">{{ a.first_name }} {{a.last_name}}</span>
+                <span (click)="ByIds(a.id)"><i class="fa-solid fa-eye m-2"></i></span>
+                <span style="cursor: pointer;" (click)="ById(a.id)" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"><i class="fa-regular fa-pen-to-square"></i></span>
+              </p>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog  modal-lg">
+                  <div class="modal-content text-start">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Residents</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form #userForm="ngForm" (ngSubmit)="updateusers()">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="name">First Name</label>
+                            <input type="text" class="form-control" id="first_name"
+                              [(ngModel)]="userByIdData.first_name" name="first_name" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" id="last_name" [(ngModel)]="userByIdData.last_name"
+                              name="last_name" required />
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Email</label>
+                            <input type="text" class="form-control" id="email" [(ngModel)]="userByIdData.email"
+                              name="email" required />
+                          </div>
+
+                        </div>
+
+
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Date of Birth</label>
+                            <input type="text" class="form-control" id="date_of_birth" [value]="getFormattedDate()"
+                              [(ngModel)]="userByIdData.date_of_birth" name="date_of_birth" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Date of Joining</label>
+                            <input type="text" class="form-control" id="date_of_joining"
+                              [(ngModel)]="userByIdData.date_of_joining" name="date_of_joining" required />
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" id="phone" [(ngModel)]="userByIdData.phone"
+                              name="phone" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Designation</label>
+                            <input type="text" class="form-control" id="designation"
+                              [(ngModel)]="userByIdData.designation" name="designation" required />
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-success m-1">Save</button>
+                        <button type="button" class="btn btn-danger" type="button" data-bs-dismiss="modal"
+                          aria-label="Close">cancel</button>
+
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p style="margin: 0; font-size: 0.9em; color: gray;text-align: start;">{{ a.email }}</p>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <select class="btn text-light"
+            style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;"
+            [ngClass]="getStatusText(a.active)" name="clientStatus" id="clientStatus" [value]="getStatus(a.active)"
+            (change)="updateStatus(a, $any($event.target).value)">
+            <option value="0">Inactive</option>
+            <option value="1">Admit</option>
+            <option value="2">Discharge</option>
+
+          </select>
+        </td>
+
+        <td>
+          <button class="btn btn-sm text-light" style="border-radius: 20px; background-color: #34395e;">{{a.group_name
+            }}</button>
+        </td>
+
+        <td>
+
+          <div class="position-relative" style="display: inline-block;">
+            <span (click)="groupidchnage(a.id)" (click)="togglePopover(i)"
+              style="cursor: pointer;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;padding: 10px;border-radius: 10px;">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </span>
+            <div *ngIf="activePopoverIndex === i" class="popover-menu"
+              style="position: absolute; top: 20px; right: 0; background: white; border: 1px solid #ccc; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 10px; z-index: 1000; border-radius: 5px;">
+              <ul style="list-style: none; margin: 0; padding: 0;">
+                <li style="display: flex; align-items: center; padding: 5px 0;">
+                  <i class="fa-solid fa-plus" style="margin-right: 8px; color: #333;"></i>
+                  <a style="text-decoration: none; color: #333;" (click)="changeGroupId(1, a.id)"
+                    class="hover-effect">Make Admin</a>
+                </li>
+                <li style="display: flex; align-items: center; padding: 5px 0;">
+                  <i class="fa-solid fa-user" style="margin-right: 8px; color: #333;"></i>
+                  <a style="text-decoration: none; color: #333;" (click)="changeGroupId(2, a.id)" class="hover-effect">
+                    Make User</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="position-relative" style="display: inline-block;">
+            <span 
+              style="cursor: pointer;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;padding: 10px;border-radius: 10px;">
+              <i class="fa-solid fa-key" data-bs-target="#exampleModal1111"  data-bs-toggle="modal" (click)="ById(a.id)"></i>
+            </span>
+                <div class="modal fade" id="exampleModal1111" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog  modal-lg">
+                  <div class="modal-content text-start">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Residents</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form #userForm="ngForm" (ngSubmit)="editpasswordsss()">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="name">Email</label>
+                            <input type="text" class="form-control" id="email"
+                              [(ngModel)]="userByIdData.email" name="email" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Password</label>
+                            <input type="text" class="form-control" id="password" [(ngModel)]="userByIdData.password"
+                              name="password" required />
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-success m-1">Save</button>
+                        <button type="button" class="btn btn-danger" type="button" data-bs-dismiss="modal"
+                          aria-label="Close">cancel</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

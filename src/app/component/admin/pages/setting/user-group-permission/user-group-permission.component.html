@@ -1,0 +1,49 @@
+
+<div class="permissions-page " >
+    <h2>Sidebar Permissions</h2>
+    <div class="alert alert-danger">
+        <strong>Note:</strong> Admin always have all the permissions. Here you can set permissions for Users and
+        Residents.
+    </div>
+    <div class="permissions-section">
+        <div class="permissions-group w-100"  >
+            <h3>Sidebar Permissions</h3>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Module/Permissions</th>
+                    <th>User</th>
+                    <th>Residents</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let module of sideData"> 
+                    <td >{{ module.side_name }}</td>
+                    <td>
+                      <label class="custom-control overflow-checkbox">
+                        <input (click)="sideMenuById(module.id)"
+                          type="checkbox"
+                          class="overflow-control-input"
+                          [checked]="module.is_user === 1"
+                          (change)="updatePermissions(module, 'is_user', $event)"
+                        />
+                        <span class="overflow-control-indicator"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label class="custom-control overflow-checkbox">
+                        <input (click)="sideMenuById(module.id)"
+                          type="checkbox"
+                          class="overflow-control-input"
+                          [checked]="module.is_client === 1"
+                          (change)="updatePermissions(module, 'is_client', $event)"
+                        />
+                        <span class="overflow-control-indicator"></span>
+                      </label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
