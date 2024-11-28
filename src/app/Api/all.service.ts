@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../Http/httpServices';
 import { superAdminEndPoints } from '../Urls/ApiUrl';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 // import { io, Socket } from 'socket.io-client';
 
 export interface ThemeSettings {
@@ -16,8 +17,8 @@ export interface ThemeSettings {
   providedIn: 'root'
 })
 export class AllService extends HttpService {
-  private apiUrl = 'http://192.168.1.231:5000/theme';
-  private apiUrlNoty = 'http://192.168.1.231:5000';
+  private apiUrl = `${environment.mainapi}theme`;
+  private apiUrlNoty = `${environment.mainapi}`;
 
   // Fetch theme settings from API
   fetchThemeSettings(): Observable<ThemeSettings> {

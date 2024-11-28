@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'; // Import HttpCl
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SweetalertssService } from 'src/app/sweetalertss.service';
 import { ThemeService } from 'src/app/theme.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -219,7 +220,7 @@ export class SidebarSettingComponent implements OnInit {
     draggedItemPosition: number,
     replacedItemPosition: number
   ) {
-    const url = 'http://192.168.1.231:5000/sidebar';
+    const url = `${environment.mainapi}sidebar`;
     const payload = {
       first_id: replacedItemId,
       last_id: draggedItemId,
@@ -306,7 +307,7 @@ export class SidebarSettingComponent implements OnInit {
     draggedItemPosition2: number,
     replacedItemPosition2: number
   ) {
-    const url = 'http://192.168.1.231:5000/subsidebar';
+    const url = `${environment.mainapi}subsidebar`;
     const payload = {
       first_id: replacedItemId2,
       last_id: draggedItemId2,

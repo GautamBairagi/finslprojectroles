@@ -8,8 +8,7 @@
 
   <div class="row">
     <div class="col-md-2"   *ngFor="let a of allData">
-      <img src="../assets/profilephoto.jpg"  class="rounded-circle img-fluid">
-      <img [src]="a.profile" alt="User Avatar" class="rounded-circle img-fluid" >
+      <img [src]="a.profile || '../assets/profilephoto.jpg'" alt="User Avatar" class="rounded-circle img-fluid" style="height: 155px; width: 155px;">
     </div>
     <div class="col-md-10">
       <div class="row">
