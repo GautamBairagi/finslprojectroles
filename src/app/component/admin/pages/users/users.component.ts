@@ -13,122 +13,12 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class UsersComponent implements OnInit  {
-//   updateForm!:FormGroup;
-// constructor(
-//   private service:AllService,
-//   private router:Router,
-//   private fb: FormBuilder,
-//   private swet :SweetalertssService,
-// ){
-//   const userIdString = localStorage.getItem('userId');
-//   this.userId = userIdString ? parseInt(userIdString, 10) : null;
 
-
-//   this.updateForm = this.fb.group({
-//     email: [''],
-//     first_name :['' ],
-//     last_name :['', ],
-//     date_of_birth :['', ],
-//     date_of_joining :['', ],
-//     designation :['', ],
-//     phone :[''],
-//   })
-// }
-
-// userId:any
-// ck: boolean = false;
-
-// dataSend: any
-
-//   ngOnInit(): void {
-//     this.getusersdatas();
-//     this.loadUsers(); 
-//   }
-//   getusersData:any= []
-//   getusersdatas() {
-//     this.service.getUsersdata().subscribe({
-//       next: (res: any) => {
-//         this.getusersData = res;
-//       },
-//       error: (err) => {
-//         console.log(err);
-//       },
-//     });
-//   }
-// onclick(){
-//   this.router.navigate(['/Admin/addusers'])
-// }
-
-
-
-//   updatestatuser() {
-//     this.service.Userstatusupdatess(this.id, this.userByIdData).subscribe((res: any) => {
-//       console.log('Nurse updated successfully', res);
-//       this.swet.SucessToast(`Alottement Updated Successfully`);
-//       window.location.reload()
-//     }, (error) => {
-//       console.error('Error updating user', error);
-//     });
-//   }
-
-
-  // toggleVerified(data: any) {
-  //   var id = data.id;
-  //   this.dataSend = {
-  //     active: !data.active 
-  //   };
-  
-  //   this.service.Userstatusupdatess(id, this.dataSend).subscribe(res => {
-  //     if (res) {
-  //       this.getusersdatas();
-  //       const accountStatus = res.active;
-  //       const doctorName = res.name;
-  //       if (accountStatus) {
-  //         this.swet.SucessToast(` Action done Successfully`);
-  //       } else {
-  //         this.swet.SucessToast(`${doctorName} Lead Action Sccessfully`);
-  //       }
-  //     }
-  //   });
-  // }
-
-//   getusersDatasss: any[] = [];
-//   searchQuery: string = '';
-//   currentPage: number = 1;
-//   totalItems: number = 0; 
-//   sortDirection: string = 'DESC';
-//   sortBy: string = 'first_name'; 
-
-
-//   loadUsers(): void {
-//     const limit = 10; 
-//     const offset = (this.currentPage - 1) * limit;  
-//     this.service.Usersdatasfilter(this.sortBy, this.sortDirection, limit, offset, this.searchQuery)
-//       .subscribe((res: any) => {
-//         this.getusersDatasss = res.data; 
-//         this.totalItems = res.total;  
-//       });
-//   }
-
-//   onSortChange(sortBy: string): void {
-//     this.sortBy = sortBy;
-//     this.sortDirection = this.sortDirection === 'ASC' ? 'DESC' : 'ASC';
-//     this.loadUsers();
-//   }
 
   onSearch(): void {
     this.currentPage = 1; 
     this.loadUsers();
   }
-
-
-//   onPageChange(page: number): void {
-//     this.currentPage = page;
-//     this.loadUsers();
-//   }
-
-
-
 userprofile(){
   this.router.navigate(['/Admin/Userdetails'])
 }
@@ -163,11 +53,47 @@ userByIdData:any=[];
     this.service.userupdatedss(this.id, this.userByIdData).subscribe((res: any) => {
       console.log('Nurse updated successfully', res);
       this.swet.SucessToast(`Alottement Updated Successfully`);
-      window.location.reload()
+      // window.location.reload()
     }, (error) => {
       console.error('Error updating user', error);
     });
   }
+
+
+  url: any; // For the current preview
+
+
+onSelectFile(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.url = reader.result;
+      this.userByIdData.profile = reader.result; // Update the model
+    };
+
+    // File type and size validation
+    const validFileTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/jpg',
+      'application/pdf',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    ];
+    if (!validFileTypes.includes(file.type)) {
+      alert('Invalid file type. Please select an image or a valid document.');
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) { // 2MB limit
+      alert('File size exceeds 2MB.');
+      return;
+    }
+  }
+}
+
+
+
 
 
 updateForm!: FormGroup;
@@ -211,17 +137,7 @@ ngOnInit(): void {
   this.loadUsers();
 }
 
-// Fetch the users
-// getusersdatas(): void {
-//   this.service.getUsersdata().subscribe({
-//     next: (res: any) => {
-//       this.getusersData = res; // Correctly bind to the table variable
-//     },
-//     error: (err) => {
-//       console.log(err);
-//     },
-//   });
-// }
+
 
 loadUsers(): void {
   const limit = this.rowsPerPage; 
@@ -242,16 +158,7 @@ onSortChange(sortBy: string): void {
   this.sortDirection = this.sortDirection === 'ASC' ? 'DESC' : 'ASC';
   this.loadUsers();
 }
-// Handle search input
-// onSearch(): void {
-//   this.currentPage = 1;
-//   this.loadUsers();
-// }
-// Handle page change
-// onPageChange(page: number): void {
-//   this.currentPage = page;
-//   this.loadUsers();
-// }
+
 
 onPageChange(page: number): void {
   if (page < 1 || page > Math.ceil(this.totalItems / this.rowsPerPage)) {
@@ -261,13 +168,11 @@ onPageChange(page: number): void {
   this.loadUsers();
 }
 
-// Handle rows per page change
 onRowsPerPageChange(): void {
   this.currentPage = 1; // Reset to first page
   this.loadUsers();
 }
 
-// Generate pagination buttons
 getPaginationButtons(): number[] {
   const totalPages = Math.ceil(this.totalItems / this.rowsPerPage);
   const pages: number[] = [];
@@ -287,15 +192,9 @@ getEndIndex(): number {
   return Math.min(this.currentPage * this.rowsPerPage, this.totalItems);
 }
 
-
-
-
-
-
 onclick(){
   this.router.navigate(['/Admin/addusers'])
 }
-
 dataSend: any
 toggleVerified(data: any) {
   var id = data.id;
@@ -316,64 +215,25 @@ toggleVerified(data: any) {
   });
 }
 
-
-
-
 activePopoverIndex: number | null = null;
-
-// togglePopover(index: number): void {
-//   // Toggle the popover for the clicked index
-//   this.activePopoverIndex = this.activePopoverIndex === index ? null : index;
-// }
-
-
 togglePopover(index: number): void {
   this.activePopoverIndex = this.activePopoverIndex === index ? null : index;
 }
-
-
-
 chnagegroupidbyusers:any=[];
   chnagegroupidbyuser(data: any) {
     this.id = data
     console.log("user id", this.id)
     this.service.getuserById(data).subscribe((res: any) => {
       this.chnagegroupidbyusers = res[0];
-      // this.service.setUserData(this.userByIdData);
       console.log("chnagegroupidbyusers by id", this.chnagegroupidbyusers)
     })
   }
-
-  // changeGroupId(groupId: number, userId: number) {
-  //   const userupdatedData = { group_id: groupId };
-  
-  //   this.service.groupidchangeByids(userId, userupdatedData).subscribe(
-  //     (res: any) => {
-  //       console.log(`Group ID updated successfully for user ${userId}`, res);
-  //       this.swet.SucessToast(`User's group changed successfully to ${groupId === 1 ? 'Admin' : groupId === 2 ? 'User' : 'Client'}`);
-  //       this.chnagegroupidbyusers.group_id = groupId; // Update local data if necessary
-  //     },
-  //     (error) => {
-  //       console.error('Error updating group ID', error);
-  //     }
-  //   );
-  // }
-
-
-
-
-
   changeGroupId(groupId: number, userId: number) {
-    // Check if the user ID is 1
     if (userId === 1) {
-      // this.swet.ErrorToast(`The group of the first user (ID: 1) cannot be changed.`);
       console.warn(`Attempted to change group for user ID 1, which is not allowed.`);
-      return; // Stop further execution
+      return;
     }
-  
-    // Proceed for other users
-    const updatedData = { group_id: groupId };
-  
+      const updatedData = { group_id: groupId };
     this.service.groupidchangeByids(userId, updatedData).subscribe(
       (res: any) => {
         console.log(`Group ID updated successfully for user ${userId}`, res);
@@ -389,8 +249,6 @@ chnagegroupidbyusers:any=[];
       }
     );
   }
-  
-
 
 }
 

@@ -78,6 +78,15 @@
                             <input type="text" class="form-control" id="email" [(ngModel)]="userByIdData.email"
                               name="email" required />
                           </div>
+                          <div class="form-group col-md-6">
+                            <label>Profile </label>
+                            <input type="file" 
+                            class="form-control" 
+                            id="profile" 
+                            (change)="onSelectFile($event)" 
+                            name="profile" 
+                            required  />
+                          </div>
 
                         </div>
 

@@ -345,7 +345,40 @@ togglePopover(index: number): void {
         console.error('Error updating user', error);
       });
     }
+    
 
+
+    url: any; // For the current preview
+
+
+    onSelectFile(event: any) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.url = reader.result;
+          this.userByIdData.profile = reader.result; // Update the model
+        };
+    
+        // File type and size validation
+        const validFileTypes = [
+          'image/jpeg',
+          'image/png',
+          'image/jpg',
+          'application/pdf',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ];
+        if (!validFileTypes.includes(file.type)) {
+          alert('Invalid file type. Please select an image or a valid document.');
+          return;
+        }
+        if (file.size > 2 * 1024 * 1024) { // 2MB limit
+          alert('File size exceeds 2MB.');
+          return;
+        }
+      }
+    }
 
 
   
