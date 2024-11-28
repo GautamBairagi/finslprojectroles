@@ -44,6 +44,7 @@ import { CurrentProvidersComponent } from '../Categories/current-providers/curre
 import { CurrentMedicationsComponent } from '../Categories/current-medications/current-medications.component';
 import { CommunityAurSocialInvolvementComponent } from '../Categories/community-aur-social-involvement/community-aur-social-involvement.component';
 import { AddResidentNoteComponent } from './shared/add-resident-note/add-resident-note.component';
+import { AddroomnotesComponent } from './pages/addroomnotes/addroomnotes.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,10 @@ const routes: Routes = [
       {
         path:'room-details',
         component:RoomDetailsComponent,
+      },
+      {
+        path:'roomnotes',
+        component:AddroomnotesComponent,
       },
       {
         path:'Userdetails',

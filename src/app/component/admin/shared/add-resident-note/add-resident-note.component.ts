@@ -36,12 +36,6 @@ export class AddResidentNoteComponent implements OnInit {
       workspace_id:['',],
     });
 
-    // const clientData = this.service.getclientData();
-    // this.allData = clientData;
-    // const client_room_number= clientData[0].room_number
-    // console.log("in mildstone client alldata:", clientData);
-    // console.log("in mildstone client room id:", client_room_number);
-    // this.loginForm.patchValue({ room_id: client_room_number });
 
   }
 

@@ -37,6 +37,7 @@ import { MedicationComponent } from './pages/medication/medication.component';
 import { UnitComponent } from './pages/unit/unit.component';
 import { AddunitComponent } from './shared/addunit/addunit.component';
 import { AddResidentNoteComponent } from './shared/add-resident-note/add-resident-note.component';
+import { AddroomnotesComponent } from './pages/addroomnotes/addroomnotes.component';
 
 
 
@@ -74,7 +75,8 @@ import { AddResidentNoteComponent } from './shared/add-resident-note/add-residen
     MedicationComponent,
     UnitComponent,
     AddunitComponent,
-    AddResidentNoteComponent
+    AddResidentNoteComponent,
+    AddroomnotesComponent
   ],
   imports: [
     CommonModule,

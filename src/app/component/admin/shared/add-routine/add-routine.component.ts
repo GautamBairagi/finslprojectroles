@@ -57,10 +57,8 @@ export class AddRoutineComponent {
       this.service.addroutines(this.loginForm.value).subscribe({
         next: (res) => {
           console.log("res", res)
-          if (res.success) {
-            this.swet.SucessToast('Routines Added succesfully')
-            this.router.navigate(['/Admin/Clientdetails'])
-          }
+          this.swet.SucessToast('Routines Added succesfully')
+          this.router.navigate(['/Admin/Clientdetails'])
         },
         error: (err) => {
           console.log(err);

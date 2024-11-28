@@ -103,3 +103,11 @@
   }
   
   
+
+  .description {
+    white-space: nowrap;        /* Prevents text from wrapping */
+    overflow: hidden;           /* Hides text that overflows */
+    text-overflow: ellipsis;    /* Displays "..." when text is too long */
+    max-width: 150px;           /* Set a max-width to trigger truncation */
+    display: inline-block;      /* Ensures the span behaves as a block */
+  }

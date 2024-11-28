@@ -27,6 +27,7 @@ export const superAdminEndPoints = {
     routines: `${baseUrl}routine`,
 
     notes: `${baseUrl}note`,
+    roomnotes: `${baseUrl}roomnotes`,
 
     addTask: `${baseUrl}task`,
     addstatus: `${baseUrl}status`,
@@ -46,6 +47,11 @@ export const superAdminEndPoints = {
     frequencys: `${baseUrl}frequency`,
     uinitsdatas: `${baseUrl}unit`,
     uinitsdataspost: `${baseUrl}unit`,
+
+
+    userroomnotesdetailss: `${baseUrl}userroomnotesdetails/`,
+
+    taskbyuserids :`${baseUrl}taskbyuserid/`,
 
     // timesdata: `${baseUrl}times`,
 

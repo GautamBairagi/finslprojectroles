@@ -230,6 +230,32 @@ export class AllService extends HttpService {
   notess(data: any) {
     return this.post(superAdminEndPoints.notes, data)
   }
+  roomnotess(data: any) {
+    return this.post(superAdminEndPoints.roomnotes, data)
+  }
+
+  roomnotesss() {
+    return this.get(superAdminEndPoints.roomnotes)
+  }
+
+
+  userroomnotesdetailsss(id: any) {
+    return this.get(superAdminEndPoints.userroomnotesdetailss + id)
+  }
+
+  taskbyuseridss(id: any) {
+    return this.get(superAdminEndPoints.taskbyuserids + id)
+  }
+
+
+
+  
+
+  
+
+
+
+  
 
   
 
