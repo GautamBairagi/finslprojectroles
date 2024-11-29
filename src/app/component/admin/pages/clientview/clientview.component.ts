@@ -317,6 +317,30 @@ togglePopover(index: number): void {
     }
 
 
+
+    facesheetgetbyisdata:any=[];
+      ByIdgertbyid(data: any) {
+        this.id = data
+        console.log("user id", this.id)
+        this.service.facesheetgetbyis(data).subscribe((res: any) => {
+          this.facesheetgetbyisdata = res[0];
+          // this.userprofile()
+          // this.service.setclientData(this.userByIdData);
+          console.log("facesheetgetbyis", this.facesheetgetbyisdata)
+        })
+      }
+
+
+
+
+  clearFaceSheet() {
+    console.log("Clear FaceSheet button clicked.");
+    this.facesheetgetbyisdata = [];
+  }
+
+    
+
+
         
     client_idss:any;
     userByIdDatas:any=[];

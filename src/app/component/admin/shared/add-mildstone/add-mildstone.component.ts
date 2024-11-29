@@ -43,7 +43,7 @@ export class AddMildstoneComponent {
 
     const clientData = this.service.getclientData();
     this.allData = clientData;
-    const client_room_number= clientData[0].room_number
+    const client_room_number= clientData[0].room_id
     console.log("in mildstone client alldata:", clientData);
     console.log("in mildstone client room id:", client_room_number);
     this.loginForm.patchValue({ room_id: client_room_number });

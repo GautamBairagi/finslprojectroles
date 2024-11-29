@@ -73,7 +73,7 @@ const routes: Routes = [
         component:SidebarSettingComponent
       },
       {
-        path:'user_group_permission',
+        path:'roles',
         component:UserGroupPermissionComponent
       },
       {

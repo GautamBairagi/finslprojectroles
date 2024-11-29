@@ -47,8 +47,8 @@ updatePermissions(module: any, role: string, event: any): void {
   this.service.sidebarpermissionByids(this.id, updatePayload).subscribe({
     next: (res) => {
       console.log('Permissions updated successfully:', res);
-      this.getsidebarsdata();
-      window.location.reload();
+      // this.getsidebarsdata();
+      // window.location.reload();
     },
     error: (err) => {
       console.error('Error updating permissions:', err);

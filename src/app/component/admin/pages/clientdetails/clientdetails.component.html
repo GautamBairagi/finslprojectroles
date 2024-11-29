@@ -1,14 +1,221 @@
 <div class="container-fluid p-3" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
-  <div class="row">
-    <div class="col-12">
-      <h2 class="text-center m-4">Resident Details</h2>
-      <hr>
+  <div class="row align-items-center">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h2 class="m-4 text-center flex-grow-1">Resident Details</h2>
+      <button class="btn btn-primary me-4" data-bs-toggle="modal" data-bs-target="#facesheetmodel">Facesheet
+        Details</button>
+      <div class="modal fade" id="facesheetmodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Facesheet Details</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <div class="container col-sm-10">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <h3>Face Sheet Add</h3>
+                  </div>
+                </div>
+
+
+                <form [formGroup]="faceSheetForm"   (ngSubmit)="addpostfacesheets()">
+                  <!-- Facility Section -->
+                  <div class="row border p-3 mb-3">
+                    <div class="col-12">
+                      <label for="facilityName" class="form-label">Name of Facility:</label>
+                      <input type="text" formControlName="facility_name" class="form-control"
+                        value="HOME OF COMFORT LLC.">
+                    </div>
+                  </div>
+
+                  <!-- Personal Information Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Personal Information</h5>
+                    <div class="col-6 mb-3">
+                      <label for="name" class="form-label">Name:</label>
+                      <input type="text" formControlName="name" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="dob" class="form-label">DOB:</label>
+                      <input type="date" formControlName="dob" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="gender" class="form-label">Gender:</label>
+                      <div>
+                        <input type="radio" formControlName="gender" value="Male"> Male
+                        <input type="radio" formControlName="gender" value="Female" class="ms-4"> Female
+                      </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="uci" class="form-label">UCI#:</label>
+                      <input type="text" formControlName="uci" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="patientNumber" class="form-label">Patient#:</label>
+                      <input type="text" formControlName="patientNumber" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="room_number" class="form-label">Room#:</label>
+                      <input type="text" formControlName="room_number" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="bed_number" class="form-label">Bed#:</label>
+                      <input type="text" formControlName="bed_number" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Insurance Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Insurance Information</h5>
+                    <div class="col-6 mb-3">
+                      <label for="insurance_id" class="form-label">Medical Insurance/Member ID#:</label>
+                      <input type="text" formControlName="insurance_id" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="other_insurance" class="form-label">Other Insurance:</label>
+                      <input type="text" formControlName="other_insurance" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="state_benefits" class="form-label">State Benefits:</label>
+                      <input type="text" formControlName="state_benefits" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Placement Details Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Placement Details</h5>
+                    <div class="col-6 mb-3">
+                      <label for="placement_date" class="form-label">Date of Placement:</label>
+                      <input type="date" formControlName="placement_date" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="previous_address" class="form-label">Previous Address:</label>
+                      <input type="text" formControlName="previous_address" class="form-control">
+                    </div>
+                  </div>
+
+
+
+                  <!-- Physical Description Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Physical Description</h5>
+                    <div class="col-6 mb-3">
+                      <label for="weight" class="form-label">Weight:</label>
+                      <input type="text" formControlName="weight" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="height" class="form-label">Height:</label>
+                      <input type="text" formControlName="height" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="eye_color" class="form-label">Eyes Color:</label>
+                      <input type="text" formControlName="eye_color" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="hair_color" class="form-label">Hair Color:</label>
+                      <input type="text" formControlName="hair_color" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Medical Information Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Medical Information</h5>
+                    <div class="col-6 mb-3">
+                      <label for="diagnosis" class="form-label">Diagnosis:</label>
+                      <textarea formControlName="diagnosis" class="form-control"></textarea>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="diet" class="form-label">Diet:</label>
+                      <textarea formControlName="diet" class="form-control"></textarea>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="food_restrictions" class="form-label">Food Restrictions:</label>
+                      <textarea formControlName="food_restrictions" class="form-control"></textarea>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="medical_needs" class="form-label">Medical Needs:</label>
+                      <textarea formControlName="medical_needs" class="form-control"></textarea>
+                    </div>
+                  </div>
+
+
+                  <!-- Medications Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Medications</h5>
+                    <div class="col-4 mb-3">
+                      <label for="medication_name" class="form-label">Medication Name:</label>
+                      <input type="text" formControlName="medication_name" class="form-control">
+                    </div>
+                    <div class="col-4 mb-3">
+                      <label for="dosage" class="form-label">Dosage:</label>
+                      <input type="text" formControlName="dosage" class="form-control">
+                    </div>
+                    <div class="col-4 mb-3">
+                      <label for="frequency" class="form-label">Frequency:</label>
+                      <input type="text" formControlName="frequency" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="prescribingMD" class="form-label">Prescribing MD:</label>
+                      <input type="text" formControlName="prescribing_md" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="allergies" class="form-label">Allergic to:</label>
+                      <textarea formControlName="allergies" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <!-- Professional Contacts Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Professional Contacts</h5>
+                    <div class="col-6 mb-3">
+                      <label for="physician" class="form-label">Physician:</label>
+                      <input type="text" formControlName="physician" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="dentist" class="form-label">Dentist:</label>
+                      <input type="text" formControlName="dentist" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="psychiatrist" class="form-label">Psychiatrist:</label>
+                      <input type="text" formControlName="psychiatrist" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="pharmacy" class="form-label">Pharmacy:</label>
+                      <input type="text" formControlName="pharmacy" class="form-control">
+                    </div>
+                  </div>
+                  <!-- Dangerous Propensities Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Dangerous Propensities</h5>
+                    <div class="col-12 mb-3">
+                      <label for="dangerous_propensities" class="form-label">Does this client have any dangerous
+                        propensities?</label>
+                      <textarea formControlName="dangerous_propensities" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <!-- Submit Button -->
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
+
   <div class="row">
-    <div class="col-md-2"   *ngFor="let a of allData">
-      <img [src]="a.profile || '../assets/profilephoto.jpg'" alt="User Avatar" class="rounded-circle img-fluid" style="height: 155px; width: 155px;">
+    <div class="col-md-2" *ngFor="let a of allData">
+      <img [src]="a.profile || '../assets/profilephoto.jpg'" alt="User Avatar" class="rounded-circle img-fluid"
+        style="height: 155px; width: 155px;">
     </div>
     <div class="col-md-10">
       <div class="row">
@@ -17,7 +224,7 @@
             <div class="card" (click)="openRoutineTab()">
               <div class="card-body">
                 <h5 class="card-title">Routine</h5>
-                <p class="card-text">{{routinelength}}</p>
+                <p class="card-text">{{routinelength || 0}}</p>
               </div>
             </div>
           </div>
@@ -25,7 +232,7 @@
             <div class="card" (click)="opentaskTab()">
               <div class="card-body">
                 <h5 class="card-title">Task</h5>
-                <p class="card-text">{{tasklength}}</p>
+                <p class="card-text">{{tasklength || 0}}</p>
               </div>
             </div>
           </div>
@@ -33,7 +240,7 @@
             <div class="card" (click)="openmedsTab()">
               <div class="card-body">
                 <h5 class="card-title">Notes</h5>
-                <p class="card-text">{{getnotessdatalength}}</p>
+                <p class="card-text">{{getnotessdatalength || 0}}</p>
               </div>
             </div>
           </div>
@@ -41,7 +248,7 @@
             <div class="card" (click)="openmildstoneTab()">
               <div class="card-body">
                 <h5 class="card-title">Milestone</h5>
-                <p class="card-text">{{mildstonelength}}</p>
+                <p class="card-text">{{mildstonelength || 0}}</p>
               </div>
             </div>
           </div>
@@ -77,11 +284,11 @@
             type="button" role="tab" aria-controls="nav-home" aria-selected="true">Routine</button>
           <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
             role="tab" aria-controls="nav-profile" aria-selected="false">Task</button>
-         
+
           <button class="nav-link" id="nav-mildstone-tab" data-bs-toggle="tab" data-bs-target="#nav-mildstone"
             type="button" role="tab" aria-controls="nav-mildstone" aria-selected="false">Milestone</button>
-            <button class="nav-link" id="nav-Notes-tab" data-bs-toggle="tab" data-bs-target="#nav-Notes"
-            type="button" role="tab" aria-controls="nav-Notes" aria-selected="false">Notes</button>
+          <button class="nav-link" id="nav-Notes-tab" data-bs-toggle="tab" data-bs-target="#nav-Notes" type="button"
+            role="tab" aria-controls="nav-Notes" aria-selected="false">Notes</button>
           <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
                         type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Activity</button> <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
                         type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Task</button> -->
@@ -93,8 +300,8 @@
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
           <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
             style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
-            <h5 class="fs-4 mt-3 text-center p-2" style="color: #777;">Residents Routine</h5> <span><button type="button"
-                routerLink="/Admin/addroutine" class="btn text-white mt-3" style="background-color: #868e92;"><span><i
+            <h5 class="fs-4 mt-3 text-center p-2">Residents Routine</h5> <span><button type="button"
+                routerLink="/Admin/addroutine" class="btn mt-3 btn-primary"><span><i
                     class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
           </div>
           <div class="mt-2"
@@ -142,8 +349,8 @@
 
           <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
             style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
-            <h5 class="fs-4 mt-3 text-center p-2" style="color: #777;">Residents Task</h5> <span><button type="button"
-                routerLink="/Admin/addtask" class="btn text-white mt-3" style="background-color: #868e92;"><span><i
+            <h5 class="fs-4 mt-3 text-center p-2">Residents Task</h5> <span><button type="button"
+                routerLink="/Admin/addtask" class="btn btn-primary mt-3"><span><i
                     class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
           </div>
           <div class="mt-2"
@@ -173,7 +380,7 @@
                 <tr *ngFor="let task of getTasksOFUserss ; let i=index;">
 
 
-                  
+
 
 
                   <td>{{i + 1}}</td>
@@ -199,7 +406,7 @@
         </div>
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 
-         
+
         </div>
 
 
@@ -207,8 +414,8 @@
 
           <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
             style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
-            <h5 class="fs-4 mt-3 text-center p-2" style="color: #777;">Resident Milestone</h5> <span><button type="button"
-                routerLink="/Admin/addmildstone" class="btn text-white mt-3" style="background-color: #868e92;"><span><i
+            <h5 class="fs-4 mt-3 text-center p-2">Resident Milestone</h5> <span><button type="button"
+                routerLink="/Admin/addmildstone" class="btn btn-primary mt-3"><span><i
                     class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
           </div>
 
@@ -230,7 +437,7 @@
                   <td>{{mild.title}}</td>
                   <td>{{mild.description}}</td>
                   <td>{{mild.status}}</td>
-                  <td>{{mild.date_created | date:'dd-MM-yyy'    }}</td>
+                  <td>{{mild.date_created | date:'dd-MM-yyy' }}</td>
                 </tr>
               </tbody>
             </table>
@@ -240,8 +447,8 @@
         <div class="tab-pane fade" id="nav-Notes" role="tabpanel" aria-labelledby="nav-Notes-tab">
           <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
             style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
-            <h5 class="fs-4 mt-3 text-center p-2" style="color: #777;">Resident Notes</h5> <span><button type="button"
-                routerLink="/Admin/addResidentNote" class="btn text-white mt-3" style="background-color: #868e92;"><span><i
+            <h5 class="fs-4 mt-3 text-center p-2">Resident Notes</h5> <span><button type="button"
+                routerLink="/Admin/addResidentNote" class="btn btn-primary mt-3"><span><i
                     class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
           </div>
 

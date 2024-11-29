@@ -385,7 +385,7 @@ export class AddTaskComponent {
 
         const clientData = this.service.getclientData();
     this.allData = clientData;
-    const client_room_number= clientData[0].room_number
+    const client_room_number= clientData[0].room_id
     console.log("in mildstone client data:", clientData);
     console.log("in mildstone client allData:", client_room_number);
     this.loginForm.patchValue({ project_id: client_room_number });

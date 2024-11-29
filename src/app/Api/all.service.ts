@@ -390,6 +390,13 @@ export class AllService extends HttpService {
   }
 
 
+  
+
+  facesheetgetbyis(id: any) {
+    return this.get(superAdminEndPoints.facesheetgetbyis + id)
+  }
+
+
   userupdatedss(id: any, data: any) {
     return this.put(superAdminEndPoints.Usersupdate + id, data)
   }
@@ -456,6 +463,13 @@ export class AllService extends HttpService {
    uinitsdatapost(data:any){
     return this.post(superAdminEndPoints.uinitsdataspost , data )
    }
+
+
+   postfacesheets(data:any){
+    return this.post(superAdminEndPoints.postfacesheet , data )
+   }
+
+   
 
 
 

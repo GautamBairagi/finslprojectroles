@@ -47,6 +47,8 @@ export const superAdminEndPoints = {
     frequencys: `${baseUrl}frequency`,
     uinitsdatas: `${baseUrl}unit`,
     uinitsdataspost: `${baseUrl}unit`,
+    postfacesheet: `${baseUrl}facesheet`,
+    facesheetgetbyis: `${baseUrl}facesheet/`,
 
 
     userroomnotesdetailss: `${baseUrl}userroomnotesdetails/`,

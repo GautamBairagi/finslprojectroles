@@ -44,10 +44,12 @@
             <!-- Name and Email -->
             <div style="margin-left: 0px;">
               <p style="margin: 0; font-weight: bold;text-align: start;font-size: 0.9em;"> <span
-                  (click)="ByIds(a.id)">{{ a.first_name }} {{a.last_name}}</span>
-                <span (click)="ByIds(a.id)"><i class="fa-solid fa-eye m-2"></i></span>
+                  (click)="ByIds(a.id)"  class="hover-underline" style="cursor: pointer;">{{ a.first_name }} {{a.last_name}}</span>
+                <span (click)="ByIds(a.id)" style="cursor: pointer;"><i class="fa-solid fa-eye m-2"></i></span>
                 <span style="cursor: pointer;" (click)="ById(a.id)" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"><i class="fa-regular fa-pen-to-square"></i></span>
+                  data-bs-target="#exampleModal"><i class="fa-regular fa-pen-to-square m-2"></i></span>
+
+                  <span (click)="ByIdgertbyid(a.id)" data-bs-toggle="modal" data-bs-target="#facesheetmodel" style="border: 1px solid #34395e; border-radius: 10px; padding: 3px; cursor: pointer;" class="hover-underline">Facesheet<i class="fa-solid fa-file m-1"></i></span>
               </p>
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -127,6 +129,255 @@
                   </div>
                 </div>
               </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="facesheetmodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content text-start">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Facesheet</h1>
+        <button type="button"  (click)="clearFaceSheet()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       
+          <div class="facesheet-container">
+            <div class="facesheet-header">
+              <h1>FaceSheet</h1>
+            </div>
+        
+            <div class="facesheet-section">
+              <h3>Facility Information:-</h3>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Facility Name:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.facility_name}}</div>
+              </div>
+            </div>
+           
+
+        
+            <div class="facesheet-section">
+              <h3>Personal  Information:-</h3>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="facesheet-row">
+                    <div class="facesheet-label">Name:</div>
+                    <div class="facesheet-value">{{facesheetgetbyisdata.facility_name}}</div>
+                  </div>
+                  <div class="facesheet-row">
+                    <div class="facesheet-label">Date of Birth:</div>
+                    <div class="facesheet-value">{{facesheetgetbyisdata.dob}}</div>
+                  </div>
+                  <div class="facesheet-row">
+                    <div class="facesheet-label">Gender:</div>
+                    <div class="facesheet-value">{{facesheetgetbyisdata.gender}}</div>
+                  </div>
+                  <div class="facesheet-row">
+                    <div class="facesheet-label">UCI #:</div>
+                    <div class="facesheet-value">{{facesheetgetbyisdata.uci}}</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="facesheet-row">
+                    <div class="facesheet-label">Bed #:</div>
+                    <div class="facesheet-value">{{facesheetgetbyisdata.bed_number}}</div>
+                  </div>
+                  <div class="facesheet-row">
+                    <div class="facesheet-label">Patient #:</div>
+                    <div class="facesheet-value">{{facesheetgetbyisdata.facility_name}}</div>
+                  </div>
+                  <div class="facesheet-row">
+                    <div class="facesheet-label">Room #:</div>
+                    <div class="facesheet-value">{{facesheetgetbyisdata.room_number}}</div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+      
+
+            <div class="facesheet-section">
+              <h3>Insurance Information:-</h3>
+              <div class="row">
+                <div class="col-sm-6">
+              <div class="facesheet-row">
+                <div class="facesheet-label">Medical Insurance:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.insurance_id}}</div>
+              </div>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Other Insurance:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.other_insurance}}</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="facesheet-row">
+                <div class="facesheet-label">State Benefits:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.state_benefits}}</div>
+              </div>
+
+            </div>
+
+            </div>
+            </div>
+            <div class="facesheet-section">
+              <h3>Placement Details:-</h3>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Date of Placement:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.diagnosis}}</div>
+              </div>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Previous Address:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.food_restrictions}}</div>
+              </div>
+            </div>
+
+
+            <div class="facesheet-section">
+              <h3>Physical Description:- </h3>
+              <div class="row">
+              <div class="col-sm-6">
+              <div class="facesheet-row">
+                <div class="facesheet-label">Height:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.height}}</div>
+              </div>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Weight:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.weight}} </div>
+              </div>
+              </div>
+              <div class="col-sm-6">
+              <div class="facesheet-row">
+                <div class="facesheet-label">Eye Color:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.eye_color}} </div>
+              </div>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Hair Color:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.hair_color}} </div>
+              </div>
+              </div>
+              </div>
+            </div>
+
+            <div class="facesheet-section">
+              <h3>Medical Information:-</h3>
+              <div class="row">
+                <div class="col-sm-6">
+              <div class="facesheet-row">
+                <div class="facesheet-label">Diagnosis:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.diagnosis}}</div>
+              </div>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Food Restrictions:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.food_restrictions}}</div>
+              </div>
+              </div>
+              <div class="col-sm-6">
+              <div class="facesheet-row">
+                <div class="facesheet-label">Diet:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.diet}} </div>
+              </div> 
+                <div class="facesheet-row">
+                <div class="facesheet-label">Medical Needs:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.medical_needs}} </div>
+              </div> 
+              </div>
+              </div>
+               
+              
+            </div>
+
+
+            <div class="facesheet-section">
+              <h3>Medications:-</h3>
+<div class="row">
+  <div class="col-sm-6">
+
+          
+              <div class="facesheet-row">
+                <div class="facesheet-label">Medication Name:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.medication_name}}</div>
+              </div>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Dosage:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.dosage}}</div>
+              </div>
+          
+              <div class="facesheet-row">
+                <div class="facesheet-label">Frequency:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.frequency}} </div>
+              </div> 
+              </div>
+              <div class="col-sm-6">
+                <div class="facesheet-row">
+                <div class="facesheet-label">Prescribing MD:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.medical_needs}} </div>
+              </div> 
+              <div class="facesheet-row">
+                <div class="facesheet-label">Allergic to:</div>
+                <div class="facesheet-value">{{facesheetgetbyisdata.allergies}} </div>
+              </div> 
+            </div>
+          </div>
+               
+              
+            </div>
+
+           
+        
+        
+            
+ 
+
+
+    
+            <div class="facesheet-section">
+              <h3>Professional Contacts /Physician & Pharmacy:-</h3>
+              <div class="row">
+                <div class="col-sm-6"> <div class="facesheet-row">
+                  <div class="facesheet-label">Physician:</div>
+                  <div class="facesheet-value">{{facesheetgetbyisdata.physician}}</div>
+                </div>
+                <div class="facesheet-row">
+                  <div class="facesheet-label">Dentist:</div>
+                  <div class="facesheet-value">{{facesheetgetbyisdata.dentist}}</div>
+                </div> </div>
+                <div class="col-sm-6">  <div class="facesheet-row">
+                  <div class="facesheet-label">Pharmacy:</div>
+                  <div class="facesheet-value">{{facesheetgetbyisdata.pharmacy}} </div>
+                </div> 
+                  <div class="facesheet-row">
+                  <div class="facesheet-label">Pharmacy:</div>
+                  <div class="facesheet-value">{{facesheetgetbyisdata.psychiatrist}} </div>
+                </div> </div>
+             
+            </div>
+
+
+            </div>
+
+            <!-- <div class="facesheet-section">
+              <h3>Dangerous Propensities:-</h3>
+              <div class="facesheet-row">
+                <div class="facesheet-label">Does this client have any dangerous propensities?:</div>
+                <br>
+                <div class="facesheet-value">{{facesheetgetbyisdata.dangerous_propensities}}</div>
+              </div>
+             
+            </div> -->
+           
+
+
+          
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearFaceSheet()">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
               <p style="margin: 0; font-size: 0.9em; color: gray;text-align: start;">{{ a.email }}</p>
             </div>
           </div>
